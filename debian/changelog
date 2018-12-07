@@ -1,3 +1,9 @@
+meta-maker (0.4) bionic; urgency=medium
+
+  * Ported to Bionic
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Fri, 07 Dec 2018 10:31:57 +0100
+
 meta-maker (0.3.1) xenial; urgency=high
 
   * Fix bug 
