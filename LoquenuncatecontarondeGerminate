@@ -1,0 +1,75 @@
+Task-Metapaquete : nombre . -> Esto produce que cuando se crea el mapeado de seeds con el nombre que tiene que coger para el metapaquete en lugar de ser el nombre del source del paquete menos meta + el nombre del seed , sea exactamente el nombre que tu le dices .
+Ejemplo :
+
+	En el control pone : 
+		Source: lliurex-meta
+		Section: unknown
+		Priority: optional
+		Maintainer: Raul Rodrigo Segura <raurodse@gmail.com>
+		Build-Depends: debhelper (>= 8.0.0)
+		Standards-Version: 3.9.4
+
+	Si tenemos una semilla llamada desktop, al hacer el germinate-update-metapackage el fichero metapackage-map tendra una linea que pondra :
+		desktop lliurex-desktop
+
+	Si ponemos en la semilla:
+		Task-Metapackage : Escriptori
+	El contenido de metapackage-map sera :
+		desktop Escriptori.
+
+	Esto es especialmente util si queremos que los metapaquetes no empiecen todos por el nombre del source o por si queremos que el nombre de la semilla no sea determinante en el nombre del metapaquete.
+
+
+Task-Seeds : seed otherseed ...
+	Esto lo que produce es crear includes en las semillas. Ejemplo :
+	Tengo la semilla core :
+	 * n4d
+	Ahora tengo la semilla apps:
+	 * gedit
+
+	Ahora creo una semilla desktop que tiene las apps y el core , ademas de otras cosas :
+
+	Task-Seeds : core apps
+	 * vim
+
+	Ahora al hacer el germinate-update-metapackage se generara la semilla desktop que contendra lo siguiente :
+		n4d
+		gedit
+		vim
+
+	Para que funcione todo esto es "VITAL" que el fichero STRUCTURE tenga la ruta para llegar a las semillas de las que depende. Tengo el fichero SRUCTURE :
+
+		required :
+		minimal : required
+		standard : 
+		custom :
+		desktop : standard
+		supported :
+
+	En el seed desktop tengo la siguiente linea :
+		Task-Seeds: standard required
+
+	Cuando ejecute el comando germinate-update-metapackage me dara un error del estilo :
+		KeyError: 'ubuntu/required'
+	Esto se debe a que desde la semilla desktop no tengo ninguna forma de llegar a required. Para solucionar esto se puede plantear de distintas formas :
+
+		required :
+		minimal : required
+		standard : 
+		custom :
+		desktop : standard required
+		supported :	 
+
+		* Con esta forma accedemos directamente a required
+
+		required :
+		minimal : required
+		standard : 
+		custom :
+		desktop : standard minimal
+		supported :
+
+		* Esta forma tambien es valida, ya que depende de minimal, y desde minimal si se puede llegar a required, ya que minimal depende de required.
+
+
+
