@@ -1,0 +1,13 @@
+Source: meta-maker
+Section: admin
+Priority: optional
+Maintainer: Raul Rodrigo Segura <raurodse@gmail.com>
+Build-Depends: debhelper (>= 10), dh-python, python3-all, python3-bs4
+Standards-Version: 4.1.2
+Homepage: http://lliurex.net
+Vcs-Git: https://github.com/edupals/meta-maker.git
+
+Package: meta-maker
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}, python3-bs4, lliurex-resolver
+Description: Tool to create and administrate seeds
