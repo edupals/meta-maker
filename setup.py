@@ -10,5 +10,5 @@ setup(name='MetaMaker',
       url='https://svn.lliurex.net/trusty/lliurex-meta-maker',
       packages=['metamaker'],
       package_dir={'':'src'},
-      scripts=['bin/lliurex-meta-maker','bin/lliurex-meta-list-generator','bin/lliurex-meta-list-search']
+      scripts=['bin/meta-maker','bin/meta-list-generator','bin/meta-list-search']
      )
